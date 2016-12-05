@@ -98,9 +98,9 @@ while True:
 	if (c2=="t" or c2=="true" or c2=="1"): conf2=True	#advanced filter to allow multiple ways to input option while making any other inputed character automatically false (put 'cat' in any [t/f] input and itll automatically be False)
 	if conf2:
 		dir=raw_input("Set Directory: ")
-		try:
+		try:	#attempts to find file specified, if the file given exists, it uses it.
 			termIn=open(dir, "r").read()
-		except:
+		except:	#otherwise it turns off and switches to terminal input mode
 			print "error: no file exists"
 			conf2=False
 	c3=raw_input("Output to file? [t/f]: ")
