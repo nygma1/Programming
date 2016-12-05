@@ -98,7 +98,11 @@ while True:
 	if (c2=="t" or c2=="true" or c2=="1"): conf2=True	#advanced filter to allow multiple ways to input option while making any other inputed character automatically false (put 'cat' in any [t/f] input and itll automatically be False)
 	if conf2:
 		dir=raw_input("Set Directory: ")
-		termIn=open(dir, "r").read()
+		try:
+			termIn=open(dir, "r").read()
+		except:
+			print "error: no file exists"
+			conf2=False
 	c3=raw_input("Output to file? [t/f]: ")
 	if (c3=="t" or c3=="true" or c3=="1"): conf3=True
 	if conf3:
