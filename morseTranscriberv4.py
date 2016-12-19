@@ -1,12 +1,6 @@
 #Inner Config
 led1=11		#parts made in a variable as a way of config incase you have that hardware, but on a different pin
-led2=13
-led3=15
-button1=12
-trigger1=14
-trigger2=16
 #Instructions
-#mCode and mLetter use the same call to convert to each other. ex: "e"="." e=mLetter[5] and mCode[5]=.
 #conf1 # Choose whether to encrypt text or decrypt morse
 conf2=False # decide whether to input a sentance or to grap from a file
 conf3=False # choose if to output results to a file
@@ -23,31 +17,22 @@ def txt2mrs(text):
 		if x in inpLetter: outMrs.append(inpLetter[x])	#a filter to reduce errors. it first checks each character on whether it is in the dictionary. if the character doesnt exist (like '_') it'll skip adding it to the output, otherwise itll send to output
 	outMrs=str(' '.join(x for x in outMrs))
 	if conf3: open(outFile, "w").write(outMrs)	#if config 3 was turned on, itll also write the code to a new file of your specification
-#	if conf4:
-#		gpio.setmode(gpio.BOARD)
-#		gpio.setup(led1, gpio.OUT)
-#		if led2!=nil: gpio.setup(led2, gpio.OUT)
-#		if led3!=nil: gpio.setup(led3, gpio.OUT)
-#		for x in outMrs:
-#			if x==".":
-#				gpio.output(13, True)
-#				gpio.output(15, True)
-#				sleep(0.25)
-#			elif x=="-":
-#				gpio.output(11, True)
-#				gpio.output(13, True)
-#				gpio.output(15, True)
-#				sleep(0.5)
-#			elif x="_":
-#				gpio.output(11, False)
-#				gpio.output(13, False)
-#				gpio.output(15, False)
-#				sleep(1)
-#			gpio.output(11, False)
-#			gpio.output(13, False)
-#			gpio.output(15, False)
-#			sleep(1)
-#		gpio.cleanup()
+	if conf4:
+		gpio.setmode(gpio.BOARD)
+		gpio.setup(led1, gpio.OUT)
+		for x in outMrs:
+			if x==".":
+				gpio.output(led1, True)
+				sleep(0.25)
+			elif x=="-":
+				gpio.output(led1, True)
+				sleep(0.5)
+			elif x="_":
+				gpio.output(led1, False)
+				sleep(1)
+			gpio.output(led1, False)
+			sleep(1)
+		gpio.cleanup()
 	return outMrs	#replaced print system with return statements and compiling the whole list to one string
 def mrs2txt(text):
 	text=text.split(" ")	#splits groups of morse to be read as individual characters
@@ -57,10 +42,10 @@ def mrs2txt(text):
 	outTxt=str(''.join(x for x in outTxt))	#thanks to this, theres no more spaces in between letters, now allowing perfects sentances to be transcribed without any manual work
 	if conf3: open(outFile, "w").write(outTxt)	#same as text
 	return outTxt
-def inMorse():	#this function makes a special text that inputs from the gpio, and outputs a morse string
-	print "Hold Trigger1 to start reading, release when done with message."
-	print "Hold Trigger2 to start a block for decrypting characters"
-	print "Press/Hold Button1 to input ./- hashtags will help you see what you input"
+#def inMorse():	#this function makes a special text that inputs from the gpio, and outputs a morse string
+#	print "Hold Trigger1 to start reading, release when done with message."
+#	print "Hold Trigger2 to start a block for decrypting characters"
+#	print "Press/Hold Button1 to input ./- hashtags will help you see what you input"
 #	gpio.setmode(gpio.BOARD)
 #	gpio.setup(trigger1, gpio.IN)
 #	gpio.setup(trigger2, gpio.IN)
