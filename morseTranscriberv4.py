@@ -55,7 +55,7 @@ def mrs2txt(text):
 	for x in text:
 		if x in inpMorse: outTxt.append(inpMorse[x])	#same filter as text
 	outTxt=str(''.join(x for x in outTxt))	#thanks to this, theres no more spaces in between letters, now allowing perfects sentances to be transcribed without any manual work
-	if conf3: open(outFile+".txt", "w").write(outTxt)	#same as text
+	if conf3: open(outFile, "w").write(outTxt)	#same as text
 	return outTxt
 def inMorse():	#this function makes a special text that inputs from the gpio, and outputs a morse string
 	print "Hold Trigger1 to start reading, release when done with message."
