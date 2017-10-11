@@ -27,7 +27,7 @@ def txt2mrs(text):
 			elif x=="-":
 				gpio.output(led1, True)
 				sleep(0.5)
-			elif x="_":
+			elif x=="_":
 				gpio.output(led1, False)
 				sleep(1)
 			gpio.output(led1, False)
